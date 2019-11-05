@@ -1,0 +1,48 @@
+{
+  "name": "cli-frontend",
+  "version": "0.1.0",
+  "license": "MIT",
+  "homepage": "https://pilotandoparavida.github.io/cli-frontend",
+  "author": {
+    "name": "Giovanna Garcia Basilio",
+    "email": "ggarciabas@gmail.com",
+    "url": "euelecavaloaco.github.io"
+  },
+  "maintainers": [
+    "Giovanna Garcia Basilio <ggarciabas@gmail.com> (euelecavaloaco.github.io)"
+  ],
+  "private": true,
+  "dependencies": {
+    "axios": "^0.19.0",
+    "gh-pages": "^2.1.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-pure-loaders": "^3.0.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "react-spinners": "^0.6.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -b gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
