@@ -17,5 +17,4 @@
 11- create-react-app admin
 12- yarn add react-pure-loaders
 13- yarn add react-spinners --save
-14- yarn add gh-pages
 ```

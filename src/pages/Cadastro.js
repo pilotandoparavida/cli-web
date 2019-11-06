@@ -3,6 +3,7 @@ import api from '../services/api';
 import logo from '../assets/logo.png';
 
 export default function Cadastro({ history }) {
+    const classname = "WEBPPV:Cadastro";
     const [nome, setNome] = useState('');
     const [nomeError, setNomeerror] = useState('');
     const [cpf, setCpf] = useState('');
@@ -111,6 +112,7 @@ export default function Cadastro({ history }) {
     }
 
     function validateForm() {
+        console.log(classname + ":validateForm inside");
         let valid = true;
 
         if (!placa) {
@@ -234,6 +236,7 @@ export default function Cadastro({ history }) {
     }
 
     async function handleSubmit(event) {
+        console.log(classname + ":handleSubmit:" + event);
         event.preventDefault();
         if (validateForm()) {
             setLoading(true);
@@ -257,6 +260,7 @@ export default function Cadastro({ history }) {
     }
 
     function handleLogout() {
+        console.log(classname + ":handleLogout");
         if (history) history.push('/');
     }
 
