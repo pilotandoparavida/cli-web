@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from '../services/api';
 import { Link } from 'react-router-dom';
-import logo from '../public/assets//logo.png';
+import logo from '../assets/logo.png';
 
 export default function Entrar({ history }) {
     const [geralError, setGeralError] = useState('');
