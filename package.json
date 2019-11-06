@@ -4,12 +4,12 @@
   "license": "MIT",
   "main": "index.js",
   "author": {
-    "name": "Giovanna Garcia Basilio",
+    "name": "Giovanna Garcia Basilio Fritsche",
     "email": "ggarciabas@gmail.com",
     "url": "euelecavaloaco.github.io"
   },
   "maintainers": [
-    "Giovanna Garcia Basilio <ggarciabas@gmail.com> (euelecavaloaco.github.io)"
+    "Giovanna Garcia Basilio Fritsche <ggarciabas@gmail.com> (euelecavaloaco.github.io)"
   ],
   "homepage": "https://pilotandoparavida.github.io/cli-web",
   "private": true,
