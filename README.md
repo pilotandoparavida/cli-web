@@ -1,4 +1,4 @@
-## Pilotando Para Vida
+# Pilotando Para Vida
 
 > Pilotando para Vida é um projeto que visa proporcionar a todos os motociclistas o aprimoramento de técnicas de pilotagem.
 
@@ -9,7 +9,7 @@ Neste respoitório está a implementação do aplicativo web para clientes.
 Nesta versão web os alunos poderão realizar o cadastro no curso e consultar sua turma.
 
 
-# Módulos utilizados
+## Módulos utilizados
 ```
 1- mkdir backend
 2- yarn init -y
