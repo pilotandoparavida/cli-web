@@ -7,7 +7,7 @@ import MainPage from './pages/Main'
 
 export default function Routes () {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL} >
             <Switch>
                 <Route path="/login" component={EntrarPage}/>
                 <Route path="/cad" component={CadastroPage}/>
