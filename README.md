@@ -8,6 +8,14 @@ Neste respoitório está a implementação do aplicativo web para clientes.
 
 Nesta versão web os alunos poderão realizar o cadastro no curso e consultar sua turma.
 
+## Colaboradores
+
+[@ggarciabas](https://github.com/ggarciabas)
+
+[@fritsche](https://github.com/fritsche)
+
+Esta implementação foi desenvolvida de forma voluntária para auxiliar na administração de turmas e alunos do projeto.
+
 
 ## Módulos utilizados
 ```
