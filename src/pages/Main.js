@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import api from '../services/api';
-import logo from '../assets/logo.png';
+import logo from './public/assets/logo.png';
 import { BallBeat } from 'react-pure-loaders';
 
 export default function Main({ history }) {
