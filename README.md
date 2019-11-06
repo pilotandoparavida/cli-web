@@ -1,5 +1,15 @@
 ## Pilotando Para Vida
 
+> Pilotando para Vida é um projeto que visa proporcionar a todos os motociclistas o aprimoramento de técnicas de pilotagem.
+
+## Repositório
+
+Neste respoitório está a implementação do aplicativo web para clientes.
+
+Nesta versão web os alunos poderão realizar o cadastro no curso e consultar sua turma.
+
+
+# Módulos utilizados
 ```
 1- mkdir backend
 2- yarn init -y
@@ -17,4 +27,4 @@
 11- create-react-app admin
 12- yarn add react-pure-loaders
 13- yarn add react-spinners --save
-```
+`
