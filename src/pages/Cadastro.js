@@ -311,7 +311,7 @@ export default function Cadastro({ history }) {
 
                         <label htmlFor="sexo">Sexo</label>
                         <select name="sexo" id="sexo" onChange={event => setSexo(event.target.value)} value={sexo}>
-                            <option value="M">Masculino</option>
+                            <option value="M" selected>Masculino</option>
                             <option value="F">Feminino</option>
                         </select>
 
