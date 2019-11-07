@@ -23,32 +23,48 @@ export default function Main({ history }) {
     const [confirmar, setConfirmar] = useState('');
     const [googlemaps, setGooglemaps] = useState('');
 
-    const manageData = useCallback((data) => {
-        localStorage.setItem('@webppv/turma_id', data.turma._id);
-        if (data.turma.descricao === "ESPERA") {
+    const manageData = useCallback((rAlunoTurma, rTurma) => {
+        localStorage.setItem('@webppv/turma_id', rTurma.dados._id);
+        if (rTurma.dados.descricao === "ESPERA") {
             setEstado("Lista de Espera");
             setEndereco("à definir");
             setData("à definir");
             setGooglemaps('');
         } else {
-            setEstado(data.estado);
-            setEndereco(data.turma.endereco);
-            const date = new Date(data.turma.data);
+            setEstado(rAlunoTurma.dados.estado);
+            setEndereco(rTurma.dados.endereco);
+            const date = new Date(rTurma.dados.data);
             setData(date.getDate() + ' de ' + monthNames[date.getMonth()] + ' de ' + date.getFullYear());
-            setGooglemaps(data.turma.googlemaps);
-            // const datac = new Date(data.updatedAt);  
-            // datac.addDays(3);                 
-            // setDataconf(datac.getDate() + ' de ' + monthNames[datac.getMonth()] + ' de ' + datac.getFullYear());
+            setGooglemaps(rTurma.dados.googlemaps);
         }
-        setConfirmar(data.confirmar);
+        setConfirmar(rAlunoTurma.dados.confirmar);
     }, [monthNames]);
 
     useEffect(() => {
-        async function alunoturma() {
+        if (aluno === '') {
+            localStorage.removeItem('@webppv/aluno_id');
+            localStorage.removeItem('@webppv/turma_id');
+            if (history) history.push('/login');
+        } else {
+            setFetching(true);
             api.get('/aluno/turma', { headers: { 'aluno_id': aluno } })
-                .then((response) => {
-                    setFetching(false);
-                    manageData(response.data.dados);
+                .then((rAlunoTurma) => {
+                    console.log("rAlunoTurma");
+                    console.log(rAlunoTurma.data.dados);
+                    api.get(`/turma/${rAlunoTurma.data.dados.turma}`)
+                        .then((rTurma) => {
+                            console.log("rTurma");
+                            console.log(rTurma.data.dados);
+                            manageData(rAlunoTurma.data, rTurma.data);
+                            setFetching(false);
+                        })
+                        .catch((error) => {
+                            setFetching(false);
+                            if (error.response) {
+                                console.log(error.response.data.msg);
+                            }
+                            handleLogout();
+                        });
                 })
                 .catch((error) => {
                     setFetching(false);
@@ -58,23 +74,15 @@ export default function Main({ history }) {
                     handleLogout();
                 });
         }
-        if (aluno === '') {
-            localStorage.removeItem('@webppv/aluno_id');
-            localStorage.removeItem('@webppv/turma_id');
-            if (history) history.push('/login');
-        } else {
-            setFetching(true);
-            alunoturma();
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [aluno, history]);
+    }, []);
 
     async function handleSim() {
         setLoading(true);
         api.get('/aluno/turma/aceitar', { headers: { 'aluno_id': aluno, "turma_id": localStorage.getItem('@webppv/turma_id') } })
             .then((response) => {
-                manageData(response.data.dados);
-                setLoading(false);
+                setConfirmar(response.data.dados.confirmar);
+                setEstado(response.data.dados.estado);
             })
             .catch((error) => {
                 setLoading(false);
@@ -88,21 +96,33 @@ export default function Main({ history }) {
     async function handleNao() {
         setLoading(true);
         api.get('/aluno/turma/negar', { headers: { 'aluno_id': aluno, 'turma_id': localStorage.getItem('@webppv/turma_id') } })
-            .then((response) => {
-                if (response.status === 200) { // transferido
-                    manageData(response.data.dados);
+            .then((rAlunoTurma) => {
+                if (rAlunoTurma.status === 200 || rAlunoTurma.status === 220) {
+                    api.get(`/turma/${rAlunoTurma.data.dados.turma}`)
+                        .then((rTurma) => {
+                            manageData(rAlunoTurma.data, rTurma.data);
+                            setFetching(false);
+                        })
+                        .catch((error) => {
+                            setFetching(false);
+                            if (error.response) {
+                                console.log(error.response.data.msg);
+                            }
+                            handleLogout();
+                        });
+                    if (rAlunoTurma.status === 220) {
+                        alert('Você já fez o curso.');
+                    } else {
+                        alert("Você foi transferido de turma!");
+                    }
                     setLoading(false);
-                    alert("Você foi transferido de turma!");
-                } else if (response.status === 210) { // removido
+
+                } else if (rAlunoTurma.status === 210) { // removido
                     setLoading(false);
                     alert('Você foi removido do sistema. Caso tenha interesse em realizar o curso, realize novamente sua inscrição.');
                     localStorage.removeItem('@webppv/aluno_id');
                     localStorage.removeItem('@webppv/turma_id');
                     if (history) history.push('/login');
-                } else if (response.status === 220) { // já fez curso, sem permissão de transferir
-                    manageData(response.data.dados);
-                    setLoading(false);
-                    alert('Você já fez o curso.');
                 }
             })
             .catch((error) => {
@@ -132,7 +152,7 @@ export default function Main({ history }) {
                 <p />
                 {googlemaps !== '' &&
                     <center>
-                        <iframe title="GoogleMaps"  src={googlemaps} style={{border:0, width:"100%", height:"200"}}></iframe>
+                        <iframe title="GoogleMaps" src={googlemaps} style={{ border: 0, width: "100%", height: "200" }}></iframe>
                     </center>
                 }
                 <p />
