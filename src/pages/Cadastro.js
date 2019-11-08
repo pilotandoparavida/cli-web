@@ -273,7 +273,7 @@ export default function Cadastro({ history }) {
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="nome">Nome*</label>
                         <div style={{ fontSize: 12, color: 'red' }}>{nomeError}</div>
-                        <input type="text" id="nome" placeholder="Nome" onChange={event => setNome(event.target.value)} value={nome} />
+                        <input type="text" id="nome" placeholder="Nome" onChange={event => setNome(event.target.value)} value={nome} style={{ textTransform: 'capitalize'}}/>
 
                         <label htmlFor="cpf">CPF*</label>
                         <div style={{ fontSize: 12, color: 'red' }}>{cpfError}</div>
@@ -293,13 +293,13 @@ export default function Cadastro({ history }) {
 
                         <label htmlFor="ufcnh">UF da CNH*</label>
                         <div style={{ fontSize: 12, color: 'red' }}>{ufcnhError}</div>
-                        <input type="text" id="ufcnh" placeholder="UF da CNH" onChange={event => setUfcnh(event.target.value)} value={ufcnh} />
+                        <input type="text" id="ufcnh" placeholder="UF da CNH" onChange={event => setUfcnh(event.target.value)} value={ufcnh} style={{ textTransform: 'uppercase'}}/>
 
                         <label htmlFor="tempocnh">Tempo de habilitação de moto</label>
                         <input type="text" id="tempocnh" placeholder="Tempo de habilitação de moto" onChange={event => setTempocnh(event.target.value)} value={tempocnh} />
 
                         <label htmlFor="cidade">Cidade</label>
-                        <input type="text" id="cidade" placeholder="Cidade" onChange={event => setCidade(event.target.value)} value={cidade} />
+                        <input type="text" id="cidade" placeholder="Cidade" onChange={event => setCidade(event.target.value)} value={cidade} style={{ textTransform: 'capitalize'}}/>
 
                         <label htmlFor="whats">WhatsApp*</label>
                         <div style={{ fontSize: 12, color: 'red' }}>{whatsError}</div>
@@ -307,11 +307,11 @@ export default function Cadastro({ history }) {
 
                         <label htmlFor="email">E-mail*</label>
                         <div style={{ fontSize: 12, color: 'red' }}>{emailError}</div>
-                        <input type="email" id="email" placeholder="E-mail" onChange={event => setEmail(event.target.value)} value={email} />
+                        <input type="email" id="email" placeholder="E-mail" onChange={event => setEmail(event.target.value)} value={email} style={{ textTransform: 'lowercase'}}/>
 
                         <label htmlFor="sexo">Sexo</label>
                         <select name="sexo" id="sexo" onChange={event => setSexo(event.target.value)} value={sexo}>
-                            <option value="M">Masculino</option>
+                            <option value="M" selected>Masculino</option>
                             <option value="F">Feminino</option>
                         </select>
 
@@ -324,7 +324,7 @@ export default function Cadastro({ history }) {
 
                         <label htmlFor="placa">Placa*</label>
                         <div style={{ fontSize: 12, color: 'red' }}>{placaError}</div>
-                        <input type="text" id="placa" placeholder="Placa no formato XXX-XXXX" onChange={event => setPlaca(event.target.value)} value={placa} />
+                        <input type="text" id="placa" placeholder="Placa no formato XXX-XXXX" onChange={event => setPlaca(event.target.value)} value={placa} style={{ textTransform: 'uppercase'}}/>
 
                         <button type="submit" disabled={loading}>
                             {loading && <i className="fa fa-cog fa-spin" />}
